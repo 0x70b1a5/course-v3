@@ -128,12 +128,23 @@ gcloud compute instances create $INSTANCE_NAME \
         --metadata="install-nvidia-driver=True" \
         --preemptible
 ```
+If you get an error saying:
+```bash
+ERROR: (gcloud.compute.instances.create) Could not fetch resource:
+ - Quota 'GPUS_ALL_REGIONS' exceeded. Limit: 0.0 globally.
+```
+You need to adjust your GPU quotas.
+1. Go to [Google Cloud Quotas Page](https://console.cloud.google.com/iam-admin/quotas).
+2. If you signed up with a free tier account, you first need to upgrade to a paid account; do so by clicking the "Upgrade account" button at the top right of the page. This won't affect your $300 credit.
+3. In filter type, select metric to be GPUs(all regions) and Location as Global 
+4. Click edit quotas and select the quota to edit(GPUs All Regions). Set the new quota limit to 1 or more 
+Your request may require confirmation, which Google claims typically takes two business days to get.
 
-You will have to wait a little bit until you see informing you the instance has been created. You can see it online [there](https://console.cloud.google.com/compute/) (note that this will be the page you have to go to later to stop your instance). 
+You will have to wait a little bit until you see the text informing you the instance has been created. You can see the instance online [here](https://console.cloud.google.com/compute/) in your list of instances (note that this will be the page you have to go to later to stop your instance). 
 
 <img alt="" src="/images/gcp/pending.png" class="screenshot">
 
-Your instance will be ready when the little icon left to its name turns green.
+Your instance will be ready when the little icon to the left of its name turns green.
 
 <img alt="" src="/images/gcp/ready.png" class="screenshot">
 
@@ -199,6 +210,7 @@ To see how to open it again, update the course or the fastai library, go to the 
 + [Using the Google Cloud SDK installer](https://cloud.google.com/sdk/docs/downloads-interactive)
 + [Installing the latest Cloud SDK version](https://cloud.google.com/sdk/docs/#install_the_latest_cloud_tools_version_cloudsdk_current_version)
 + [Installing Google Cloud SDK (StackOverflow question)](https://stackoverflow.com/questions/46822766/sudo-apt-get-update-sudo-apt-get-install-google-cloud-sdk-cannot-be-done)
++ [GCP Error Quotas GPUs All Regions Exceeded(Stack Overflow question)](https://stackoverflow.com/questions/53415180/gcp-error-quota-gpus-all-regions-exceeded-limit-0-0-globally)
 
 ---
 
